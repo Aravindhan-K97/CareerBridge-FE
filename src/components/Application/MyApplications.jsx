@@ -20,8 +20,8 @@ const MyApplications = () => {
       try {
         const url =
           user && user.role === "Employer"
-            ? "http://localhost:4000/api/v1/application/employer/getall"
-            : "http://localhost:4000/api/v1/application/jobseeker/getall";
+            ? "https://careerbridge-be.onrender.com/api/v1/application/employer/getall"
+            : "https://careerbridge-be.onrender.com/api/v1/application/jobseeker/getall";
 
         const res = await axios.get(url, { withCredentials: true });
         setApplications(res.data.applications);
@@ -40,7 +40,7 @@ const MyApplications = () => {
   const deleteApplication = async (id) => {
     try {
       const res = await axios.delete(
-        `http://localhost:4000/api/v1/application/delete/${id}`,
+        `https://careerbridge-be.onrender.com/api/v1/application/delete/${id}`,
         { withCredentials: true }
       );
       toast.success(res.data.message);
@@ -55,7 +55,7 @@ const MyApplications = () => {
   const updateApplicationStatus = async (id, status) => {
     try {
       const res = await axios.patch(
-        `http://localhost:4000/api/v1/application/status/${id}`,
+        `https://careerbridge-be.onrender.com/api/v1/application/status/${id}`,
         { status },
         { withCredentials: true }
       );
