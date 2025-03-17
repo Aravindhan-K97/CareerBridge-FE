@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import "./App.css";
 import { Context } from "./main";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -17,7 +17,7 @@ import PostJob from "./components/Job/PostJob";
 import NotFound from "./components/NotFound/NotFound";
 import MyJobs from "./components/Job/MyJobs";
 import Chatbot from "./components/Chatbot/Chatbot";
-import Details from "./components/Details/Details"; // Import the Details component
+import Details from "./components/Details/Details";
 
 const App = () => {
   const { isAuthorized, setIsAuthorized, setUser } = useContext(Context);
@@ -27,41 +27,39 @@ const App = () => {
       try {
         const response = await axios.get(
           "https://careerbridge-be.onrender.com/api/v1/user/getuser",
-          {
-            withCredentials: true,
-          }
+          { withCredentials: true }
         );
         setUser(response.data.user);
         setIsAuthorized(true);
       } catch (error) {
+        console.error("Authentication failed:", error.response?.data?.message);
         setIsAuthorized(false);
       }
     };
+
     fetchUser();
-  }, [isAuthorized, setUser, setIsAuthorized]);
+  }, [setUser, setIsAuthorized]); // ✅ Removed `isAuthorized` to prevent infinite loop
 
   return (
-    <>
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/job/getall" element={<Jobs />} />
-          <Route path="/job/:id" element={<JobDetails />} />
-          <Route path="/application/:id" element={<Application />} />
-          <Route path="/applications/me" element={<MyApplications />} />
-          <Route path="/job/post" element={<PostJob />} />
-          <Route path="/job/me" element={<MyJobs />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        <Footer />
-        <Toaster />
-        {isAuthorized && <Chatbot />}
-        <Details /> {/* Add the Details component here */}
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <Navbar />
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/job/getall" element={<Jobs />} />
+        <Route path="/job/:id" element={<JobDetails />} />
+        <Route path="/application/:id" element={<Application />} />
+        <Route path="/applications/me" element={<MyApplications />} />
+        <Route path="/job/post" element={<PostJob />} />
+        <Route path="/job/me" element={<MyJobs />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      <Footer />
+      <Toaster />
+      {isAuthorized ? <Chatbot /> : null} {/* ✅ Chatbot loads only if authenticated */}
+      <Details />
+    </BrowserRouter>
   );
 };
 
