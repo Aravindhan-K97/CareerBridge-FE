@@ -28,7 +28,7 @@ const Navbar = () => {
       sessionStorage.removeItem("greetingShown");
       navigateTo("/login");
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error.response?.data?.message || "Logout failed. Please try again.");
       setIsAuthorized(true);
     }
   };
