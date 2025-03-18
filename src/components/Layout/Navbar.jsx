@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 import { FiX } from "react-icons/fi";
 import "./Navbar.css";
 
-import logo from "./CareerBridgelogo-nav.png";
+import logo from "./jobdekhologo-nav.png";
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
