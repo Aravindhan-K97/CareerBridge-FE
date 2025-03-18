@@ -4,11 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { motion } from "framer-motion";
-import { FiX } from "react-icons/fi";
+import { motion as Motion } from "framer-motion";import { FiX } from "react-icons/fi";
 import "./Navbar.css";
 
 import logo from "./jobdekhologo-nav.png";
+
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
@@ -17,21 +17,22 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.get(
+      await axios.get(
         "https://careerbridge-be.onrender.com/api/v1/user/logout",
         {
-          withCredentials: true,
+          withCredentials: true, // ✅ Required for clearing cookies
         }
       );
-      toast.success(response.data.message);
+  
+      toast.success("Logged out successfully!");
       setIsAuthorized(false);
       sessionStorage.removeItem("greetingShown");
       navigateTo("/login");
     } catch (error) {
-      toast.error(error.response.data.message);
-      setIsAuthorized(true);
+      toast.error(error.response?.data?.message || "Logout failed");
     }
   };
+  
 
   useEffect(() => {
     if (!isAuthorized) {
@@ -64,7 +65,7 @@ const Navbar = () => {
         <div className="hamburgerMenu" onClick={() => setShow(!show)}>
           {show ? <FiX /> : <GiHamburgerMenu />}
         </div>
-      )}
+      )},
       <motion.nav
         className={`sidebar ${isAuthorized ? "navbarShow" : "navbarHide"}`}
         animate={show ? "open" : "closed"}
