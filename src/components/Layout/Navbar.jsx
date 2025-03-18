@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 import { FiX } from "react-icons/fi";
 import "./Navbar.css";
 
-import logo from "./jobdekhologo-nav.png";
+import logo from "./CareerBridgelogo-nav.png";
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
@@ -28,7 +28,7 @@ const Navbar = () => {
       sessionStorage.removeItem("greetingShown");
       navigateTo("/login");
     } catch (error) {
-      toast.error(error.response?.data?.message || "Logout failed!");
+      toast.error(error.response.data.message);
       setIsAuthorized(true);
     }
   };
@@ -71,7 +71,7 @@ const Navbar = () => {
         variants={sidebarVariants}
       >
         <div className="sidebarContainer">
-          <img src={logo} alt="JobDekho" className="sidebarLogo" /> {/* Add this line */}
+          <img src={logo} alt="CareerBridge" className="sidebarLogo" /> {/* Add this line */}
           <ul className="sidebarMenu">
             <li>
               <Link to={"/"} onClick={() => setShow(false)}>

@@ -41,8 +41,7 @@ const Register = () => {
       setRole("");
       setIsAuthorized(true);
     } catch (error) {
-      const errorMessage = error.response?.data?.message || "An error occurred. Please try again.";
-      toast.error(errorMessage);
+      toast.error(error.response.data.message);
     }
   };
 

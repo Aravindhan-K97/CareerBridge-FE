@@ -40,7 +40,7 @@ const MyApplications = () => {
   const deleteApplication = async (id) => {
     try {
       const res = await axios.delete(
-        `https://careerbridge-be.onrender.com/api/v1/application/delete/${id}`,
+        `http://localhost:4000/api/v1/application/delete/${id}`,
         { withCredentials: true }
       );
       toast.success(res.data.message);
@@ -55,7 +55,7 @@ const MyApplications = () => {
   const updateApplicationStatus = async (id, status) => {
     try {
       const res = await axios.patch(
-        `https://careerbridge-be.onrender.com/api/v1/application/status/${id}`,
+        `http://localhost:4000/api/v1/application/status/${id}`,
         { status },
         { withCredentials: true }
       );
@@ -224,4 +224,4 @@ const EmployerCard = ({ element, deleteApplication, updateApplicationStatus, ope
       </div>
     </div>
   );
-};  
+};
