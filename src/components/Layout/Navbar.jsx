@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { motion as Motion } from "framer-motion";import { FiX } from "react-icons/fi";
+import { motion } from "framer-motion";
 import "./Navbar.css";
 
 import logo from "./jobdekhologo-nav.png";
