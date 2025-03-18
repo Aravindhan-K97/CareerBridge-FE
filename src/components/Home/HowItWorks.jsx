@@ -8,7 +8,7 @@ const HowItWorks = () => {
   return (
     <div className="howitworks-howitworks">
       <div className="container-howitworks">
-        <h3>How Job-Dekho Works</h3>
+        <h3>How CareerBridge Works</h3>
         <div className="banner-howitworks">
           <div className="card-howitworks">
             <div className="content-howitworks">
